@@ -3,20 +3,26 @@ import subprocess
 import time
 import pyautogui
 
+# First attemp to automate programs with python
+
 
 def openMySqlWorkbench():
-    os.startfile(
-        r"C:\Program Files\MySQL\MySQL Workbench 8.0 CE\MySQLWorkbench.exe")
+    mysql_workbench_path = r"C:\Program Files\MySQL\MySQL Workbench 8.0 CE\MySQLWorkbench.exe"
+    subprocess.Popen([mysql_workbench_path])
 
 
 def openSTS():
-    os.startfile(
-        r"C:\Users\papab\Desktop\sts-4.17.0.RELEASE\SpringToolSuite4.exe")
+    sts_path = r"C:\Users\papab\Desktop\sts-4.17.0.RELEASE\SpringToolSuite4.exe"
+    subprocess.Popen([sts_path])
+
+    # wait for sts to be ready
+    time.sleep(15)
+    pyautogui.press('enter')
 
 
 def openSourceTree():
-    os.startfile(
-        r"C:\Users\papab\AppData\Local\SourceTree\SourceTree.exe")
+    sourceTree_path = r"C:\Users\papab\AppData\Local\SourceTree\SourceTree.exe"
+    subprocess.Popen([sourceTree_path])
 
 
 def openVSCode():
@@ -45,11 +51,11 @@ def openVSCode():
     pyautogui.press('enter')
 
     # open terminal, ctrl + shift + '   or crtl + shift + ò
-    time.sleep(1)
+    time.sleep(5)
     pyautogui.hotkey('ctrl', 'shift', '\'')
 
     # wait for terminal to be ready and then type command to start server and open browser
-    time.sleep(3)
+    time.sleep(20)
     run_angular_server = "ng serve -o"
     pyautogui.write(run_angular_server)
     pyautogui.press('enter')
@@ -57,9 +63,9 @@ def openVSCode():
 
 def openDailyPrograms():
     openVSCode()
-    # openMySqlWorkbench()
-    # openSTS()
-    # openSourceTree()
+    openMySqlWorkbench()
+    openSTS()
+    openSourceTree()
 
 
 openDailyPrograms()
