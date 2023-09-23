@@ -1,17 +1,17 @@
-import os
 import subprocess
 import time
 import pyautogui
+import asyncio
 
 # First attemp to automate programs with python
 
 
-def openMySqlWorkbench():
+async def openMySqlWorkbench():
     mysql_workbench_path = r"C:\Program Files\MySQL\MySQL Workbench 8.0 CE\MySQLWorkbench.exe"
     subprocess.Popen([mysql_workbench_path])
 
 
-def openSTS():
+async def openSTS():
     sts_path = r"C:\Users\papab\Desktop\sts-4.17.0.RELEASE\SpringToolSuite4.exe"
     subprocess.Popen([sts_path])
 
@@ -20,18 +20,18 @@ def openSTS():
     pyautogui.press('enter')
 
 
-def openSourceTree():
+async def openSourceTree():
     sourceTree_path = r"C:\Users\papab\AppData\Local\SourceTree\SourceTree.exe"
     subprocess.Popen([sourceTree_path])
 
 
-def openVSCode():
+async def openVSCode():
     # open visual studio code at the path specified
     vscode_path = r"C:\Users\papab\AppData\Local\Programs\Microsoft VS Code\Code.exe"
     subprocess.Popen([vscode_path])
 
     # Wait for Visual Studio Code to start (adjust the delay as needed)
-    time.sleep(5)
+    await asyncio.sleep(5)
 
     # ctrl + shift + e to open the side menu
     pyautogui.hotkey('ctrl', 'shift', 'e')
@@ -41,31 +41,31 @@ def openVSCode():
     pyautogui.hotkey('ctrl', 'o')
 
     # Type the folder path and press Enter
-    time.sleep(1)
+    await asyncio.sleep(1)
     path_to_open = r"C:\Users\papab\Documents\portfolio-projects\chaseToAMillionBucks"
     pyautogui.write(path_to_open)
     pyautogui.press('enter')
 
     # press enter to open the selected folder
-    time.sleep(1)
+    await asyncio.sleep(1)
     pyautogui.press('enter')
 
     # open terminal, ctrl + shift + '   or crtl + shift + ò
-    time.sleep(5)
+    await asyncio.sleep(5)
     pyautogui.hotkey('ctrl', 'shift', '\'')
 
     # wait for terminal to be ready and then type command to start server and open browser
-    time.sleep(20)
+    await asyncio.sleep(20)
     run_angular_server = "ng serve -o"
     pyautogui.write(run_angular_server)
     pyautogui.press('enter')
 
 
-def openDailyPrograms():
-    openVSCode()
-    openMySqlWorkbench()
-    openSTS()
-    openSourceTree()
+async def openDailyPrograms():
+    await openVSCode()
+    await openSTS()
+    await openMySqlWorkbench()
+    await openSourceTree()
 
 
-openDailyPrograms()
+asyncio.run(openDailyPrograms())
